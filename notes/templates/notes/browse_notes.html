@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Browse Notes</h2>
+<form method="get">
+    <label for="search">Search notes:</label>
+    <input id="search" type="text" name="q" placeholder="Search notes..." value="{{ request.GET.q }}">
+    <input type="submit" value="Search">
+</form>
+<br>
+{% for note in notes %}
+<div class="note-card">
+    <h3>{{ note.title }}</h3>
+    <p><strong>Subject:</strong> {{ note.subject.name }}</p>
+    <p>{{ note.description|linebreaks }}</p>
+    <p><strong>Tags:</strong> {{ note.tags }}</p>
+    {% if note.file %}
+        <a href="{% url 'download_note' note.id %}">📥 Download</a>
+        ({{ note.downloads }} downloads)
+    {% else %}
+        <em>No file available</em>
+    {% endif %}
+</div>
+{% empty %}
+<p>No notes found.</p>
+{% endfor %}
+{% endblock %}

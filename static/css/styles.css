@@ -1,0 +1,39 @@
+.navbar {
+  background-color: #f9f9f9;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #0d6efd;
+  font-weight: 500;
+}
+
+.navbar span {
+  color: #333;
+}
+
+.logout-form {
+  display: inline;
+}
+
+.logout-form button {
+  background: none;
+  border: none;
+  color: #0d6efd;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0;
+}

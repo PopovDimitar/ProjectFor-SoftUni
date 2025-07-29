@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Browse Notes</h2>
+  <form method="get">
+    <input type="text" name="q" placeholder="Search notes..." value="{{ request.GET.q }}">
+
+    <select name="sort" onchange="this.form.submit()">
+      {% for val, label in [
+        ('newest', 'Newest'),
+        ('oldest', 'Oldest'),
+        ('az', 'A–Z'),
+        ('za', 'Z–A')
+      ] %}
+        <option value="{{ val }}" {% if request.GET.sort == val %}selected{% endif %}>{{ label }}</option>
+    </select>
+
+    <button type="submit">Search</button>
+  </form>
+
+  <ul>
+    {% for note in notes %}
+      <li>
+        <strong>{{ note.title }}</strong> – {{ note.subject }}
+        <a href="{% url 'view_note' note.id %}">▶ View</a>
+        <a href="{% url 'edit_note' note.id %}">✏ Edit</a>
+        <a href="{% url 'delete_note' note.id %}" onclick="return confirm('Are you sure you want to delete this note?')">🗑 Delete</a>
+      </li>
+    {% empty %}
+      <li>No notes found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
